@@ -15,6 +15,7 @@ Define the ScriptableObject types you support using an enumeration. This project
 ## ScriptableObjectManager Class
 The ScriptableObjectManager class provides static methods for loading and caching ScriptableObjects.
 
-## LoadScriptableObject<T>(): Generic method to load and cache the specified type of ScriptableObject. If the ScriptableObject has been previously loaded, it returns the cached instance.
+## LoadScriptableObject<T>(): 
+Generic method to load and cache the specified type of ScriptableObject. If the ScriptableObject has been previously loaded, it returns the cached instance.
 GetScriptableObjectType<T>(): Helper method to map the generic type to the corresponding enum value.
 
