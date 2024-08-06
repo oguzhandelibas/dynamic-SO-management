@@ -2,22 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ScriptableObjectManager
+public static class SO_Manager
 {
-    private static readonly Dictionary<ScriptableObjectType, string> Paths = new Dictionary<ScriptableObjectType, string>
+    private static readonly Dictionary<SO_Type, string> Paths = new Dictionary<SO_Type, string>
     {
-        { ScriptableObjectType.GameSignals, "GameSignals"},
+        // in resources folder
+        { SO_Type.GameSignals, "ScriptableObjects/Signal/GameSignals"},
     };
 
-    private static readonly Dictionary<ScriptableObjectType, ScriptableObject> _cache = new Dictionary<ScriptableObjectType, ScriptableObject>();
+    private static readonly Dictionary<SO_Type, ScriptableObject> _cache = new Dictionary<SO_Type, ScriptableObject>();
 
-    public static T LoadScriptableObject<T>() where T : ScriptableObject
+    public static T Get<T>() where T : ScriptableObject
     {
         var type = GetScriptableObjectType<T>();
         return LoadScriptableObject<T>(type);
     }
     
-    private static T LoadScriptableObject<T>(ScriptableObjectType type) where T : ScriptableObject
+    private static T LoadScriptableObject<T>(SO_Type type) where T : ScriptableObject
     {
         if (_cache.TryGetValue(type, out var value))
         {
@@ -45,10 +46,10 @@ public static class ScriptableObjectManager
         return null;
     }
 
-    private static ScriptableObjectType GetScriptableObjectType<T>() where T : ScriptableObject
+    private static SO_Type GetScriptableObjectType<T>() where T : ScriptableObject
     {
         if (typeof(T) == typeof(GameSignals))
-            return ScriptableObjectType.GameSignals;
+            return SO_Type.GameSignals;
         
         throw new ArgumentException($"Unsupported ScriptableObject type: {typeof(T)}");
     }
